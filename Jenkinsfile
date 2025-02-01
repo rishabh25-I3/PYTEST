@@ -17,7 +17,7 @@ pipeline {
         stage('Set Up Python Environment') {
     steps {
         // Upgrade pip for Python on Windows
-        bat 'C:\Users\DELL\AppData\Local\Programs\Python\Python312\python -m pip install --upgrade pip'
+        bat 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\python -m pip install --upgrade pip'
     }
 }
 
