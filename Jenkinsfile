@@ -15,18 +15,18 @@ pipeline {
         }
 
         stage('Set Up Python Environment') {
-            stage('Set Up Python Environment') {
-    steps {
-        sh 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\python -m pip install --upgrade pip'
-    }
-}
+            steps {
+                // Upgrade pip for Python on Windows
+                sh 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\python -m pip install --upgrade pip'
+            }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Activate the virtual environment and install dependencies
+                // Set up virtual environment and install dependencies
                 sh '''
-                    source venv/bin/activate
+                    python -m venv ${VENV_DIR}
+                    ${VENV_DIR}\\Scripts\\activate
                     if [ -f requirements.txt ]; then
                         pip install -r requirements.txt
                     fi
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 // Run pytest within the virtual environment
                 sh '''
-                    source venv/bin/activate
+                    ${VENV_DIR}\\Scripts\\activate
                     pytest --maxfail=5 --disable-warnings -q
                 '''
             }
