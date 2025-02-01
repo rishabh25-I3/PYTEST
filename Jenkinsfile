@@ -15,15 +15,11 @@ pipeline {
         }
 
         stage('Set Up Python Environment') {
-            steps {
-                // Install virtualenv and create a virtual environment
-                sh '''
-                    python -m pip install --upgrade pip
-                    pip install virtualenv
-                    virtualenv venv
-                    source venv/bin/activate
-                '''
-            }
+            stage('Set Up Python Environment') {
+    steps {
+        sh 'C:/Python39/python -m pip install --upgrade pip'
+    }
+}
         }
 
         stage('Install Dependencies') {
