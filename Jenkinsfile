@@ -17,7 +17,7 @@ pipeline {
         stage('Set Up Python Environment') {
             stage('Set Up Python Environment') {
     steps {
-        sh 'C:\Users\DELL\AppData\Local\Programs\Python\Python312/python -m pip install --upgrade pip'
+        sh 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\python -m pip install --upgrade pip'
     }
 }
         }
