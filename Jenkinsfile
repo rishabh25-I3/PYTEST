@@ -2,41 +2,38 @@ pipeline {
     agent any
 
     environment {
-        // Define the Python virtual environment path
-        VENV_DIR = "${env.WORKSPACE}/venv"
+        PYTHON_HOME = 'C:/Users/DELL/AppData/Local/Programs/Python/Python312'
+        PATH = "${env.PYTHON_HOME};${env.PYTHON_HOME}/Scripts;${env.PATH}"
+        VENV_DIR = "${WORKSPACE}/venv"
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                // Clone the repository from GitHub
                 git branch: 'main', url: 'https://github.com/rishabh25-I3/PYTEST.git'
             }
         }
 
         stage('Set Up Python Environment') {
-    steps {
-        // Upgrade pip for Python on Windows
-        bat 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\python -m pip install --upgrade pip'
-    }
-}
+            steps {
+                bat 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\python -m pip install --upgrade pip'
+            }
+        }
 
         stage('Install Dependencies') {
             steps {
-                // Set up virtual environment and install dependencies
                 bat '''
-                    python -m venv ${VENV_DIR}
+                    C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\python -m venv ${VENV_DIR}
                     ${VENV_DIR}\\Scripts\\activate
-                    if [ -f requirements.txt ]; then
-                        pip install -r requirements.txt
-                    fi
+                    if exist requirements.txt (
+                        ${VENV_DIR}\\Scripts\\pip install -r requirements.txt
+                    )
                 '''
             }
         }
 
         stage('Run Pytest') {
             steps {
-                // Run pytest within the virtual environment
                 bat '''
                     ${VENV_DIR}\\Scripts\\activate
                     pytest --maxfail=5 --disable-warnings -q
