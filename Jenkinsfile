@@ -15,11 +15,11 @@ pipeline {
         }
 
         stage('Set Up Python Environment') {
-            steps {
-                // Upgrade pip for Python on Windows
-                sh 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\python -m pip install --upgrade pip'
-            }
-        }
+    steps {
+        // Upgrade pip for Python on Windows
+        sh 'C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\python -m pip install --upgrade pip'
+    }
+}
 
         stage('Install Dependencies') {
             steps {
