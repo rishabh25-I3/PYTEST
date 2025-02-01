@@ -24,7 +24,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Set up virtual environment and install dependencies
-                sh '''
+                bat '''
                     python -m venv ${VENV_DIR}
                     ${VENV_DIR}\\Scripts\\activate
                     if [ -f requirements.txt ]; then
@@ -37,7 +37,7 @@ pipeline {
         stage('Run Pytest') {
             steps {
                 // Run pytest within the virtual environment
-                sh '''
+                bat '''
                     ${VENV_DIR}\\Scripts\\activate
                     pytest --maxfail=5 --disable-warnings -q
                 '''
